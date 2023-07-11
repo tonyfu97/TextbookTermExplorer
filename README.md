@@ -44,6 +44,10 @@ You can adjust the following constants to modify the behavior of the script:
 * `WINDOW_SIZE_AFTER` (default: 100) - The number of words after the term to include in the context.
 * `MAX_NUM_CONTEXTS` (default: 10) - The maximum number of contexts to consider when generating a definition.
 
+## Customizing the Chatbot Prompt
+
+You can modify the `get_definition` function in the script to customize the prompt sent to the Chatbot. The current prompt asks for a succinct definition of the term and optionally highlights any differences between the term's usage in the provided context and its conventional meaning. You can change the wording of this prompt to better suit your needs.
+
 ## Warning
 
 Please be aware of OpenAI's pricing structure. Generating definitions can consume a significant number of tokens depending on the size of the context and the number of terms for which you generate definitions.

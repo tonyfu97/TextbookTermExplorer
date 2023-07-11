@@ -52,7 +52,7 @@ def extract_contexts(book_text, term):
 def get_definition(term, context):
     response = openai.Completion.create(
         model="text-davinci-003",
-        prompt=f"The term '{term}' appears in the following context: '{context}'. Can you define it? Please get straight to the defintion. Don't answer 'sure' or 'yes'. And if there is a typo in the term, please fix it, but do not mention the typo in the reply.\n\nDefinition:",
+        prompt=f"The term '{term}' is used in the following context: '{context}'. Please provide a succinct definition. If the usage of the term in this context diverges from its conventional meaning, highlight the differences.\n\nDefinition:",
         temperature=0.3,
         max_tokens=200
     )
