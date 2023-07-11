@@ -24,8 +24,8 @@ def get_contexts(text, term):
     words = text.split()
     contexts = []
     for i in range(len(words)):
-        if term in words[i]:
-            context = " ".join(words[max(0, i-WINDOW_SIZE_BEFORE):min(len(words), i+WINDOW_SIZE_AFTER)])
+        if term in " ".join(words[i:i+len(term.split())]):
+            context = " ".join(words[max(0, i-WINDOW_SIZE_BEFORE):min(len(words), i+len(term.split())+WINDOW_SIZE_AFTER)])
             print(context)
             contexts.append(context)
             if len(contexts) == MAX_NUM_CONTEXTS:
@@ -52,7 +52,7 @@ def extract_contexts(book_text, term):
 def get_definition(term, context):
     response = openai.Completion.create(
         model="text-davinci-003",
-        prompt=f"The term '{term}' appears in the following context: '{context}'. Can you define it? Please get straight to the defintion. Don't answer 'sure' or 'yes'.\n\nDefinition:",
+        prompt=f"The term '{term}' appears in the following context: '{context}'. Can you define it? Please get straight to the defintion. Don't answer 'sure' or 'yes'. And if there is a typo in the term, please fix it, but do not mention the typo in the reply.\n\nDefinition:",
         temperature=0.3,
         max_tokens=200
     )

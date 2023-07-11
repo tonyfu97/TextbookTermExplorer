@@ -26,7 +26,7 @@
 </head>
 <body>
     <h1>Term Definitions</h1>
-    <p>These definitions are generated with AI based on the book "Conscious Mind, Resonant Brain: How Each Brain Makes a Mind" by Stephen Grossberg (2021) and may not be accurate. Click on the terms to see the definitions. <a href="https://github.com/tonyfu97/TextbookTermExplorer">Check the project on Github</a></p>  
+    <p>These definitions are generated with AI based on the book "Conscious Mind, Resonant Brain: How Each Brain Makes a Mind" by Stephen Grossberg (2021) and may not be accurate. Click on the terms to see the definitions. To generate definitions for your own book, please <a href="https://github.com/tonyfu97/TextbookTermExplorer">check the project on Github</a></p>  
     <div id="definitions"></div>
 
     <script>
@@ -36,7 +36,8 @@
                 let definitionsDiv = document.getElementById('definitions');
 
                 // Sort terms alphabetically
-                let sortedTerms = Object.keys(data).sort();
+                let sortedTerms = Object.keys(data).sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()));
+
 
                 for (let term of sortedTerms) {
                     let termP = document.createElement('p');
