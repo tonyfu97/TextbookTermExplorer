@@ -26,7 +26,8 @@ def get_contexts(text, term):
     for i in range(len(words)):
         if term in " ".join(words[i:i+len(term.split())]):
             context = " ".join(words[max(0, i-WINDOW_SIZE_BEFORE):min(len(words), i+len(term.split())+WINDOW_SIZE_AFTER)])
-            print(context)
+            highlighted_context = re.sub(f'({term})', r'\033[91m\1\033[0m', context, flags=re.IGNORECASE)
+            print(highlighted_context)
             contexts.append(context)
             if len(contexts) == MAX_NUM_CONTEXTS:
                 break
@@ -104,7 +105,7 @@ def main(pdf_path, definitions_path):
         # Generate definition with ChatGPT for each context
         definition = get_definition(term, contexts)
         definitions[term] = definition
-        print(f"Definition: {definition}\n")
+        print(f"\n\033[92mDefinition: {definition}\033[0m\n")
 
         # Save definitions to file
         with open(definitions_path, "w") as file:
