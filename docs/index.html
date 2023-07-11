@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Term Definitions</title>
+    <style>
+        .term {
+            margin: 10px;
+            cursor: pointer;
+        }
+        .term:hover .definition {
+            visibility: visible;
+        }
+        .definition {
+            visibility: hidden;
+            background-color: #f9f9f9;
+            color: black;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px 0;
+            position: absolute;
+            z-index: 1;
+        }
+    </style>
+</head>
+<body>
+    <h1>Term Definitions</h1>
+    <p>These definitions are generated with AI based on the book "Conscious Mind, Resonant Brain: How Each Brain Makes a Mind" by Stephen Grossberg (2021) and may not be accurate.</p>
+    <div id="definitions"></div>
+
+    <script>
+        fetch('results/definition.json')
+            .then(response => response.json())
+            .then(data => {
+                let definitionsDiv = document.getElementById('definitions');
+                for (let term in data) {
+                    let termDiv = document.createElement('div');
+                    termDiv.classList.add('term');
+                    termDiv.innerHTML = term;
+
+                    let definitionDiv = document.createElement('div');
+                    definitionDiv.classList.add('definition');
+                    definitionDiv.innerHTML = data[term];
+
+                    termDiv.appendChild(definitionDiv);
+                    definitionsDiv.appendChild(termDiv);
+                }
+            });
+    </script>
+    <footer>
+        <a href="https://github.com/tonyfu97/TextbookTermExplorer">Check the project on Github</a>
+    </footer>
+</body>
+</html>
