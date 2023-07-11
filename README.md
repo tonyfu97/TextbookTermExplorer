@@ -29,7 +29,7 @@ OPENAI_API_KEY=your-api-key
 * Run the script in the terminal by specifying the paths to your PDF file and definitions file:
 
 ```bash
-python3 TextbookTermExplorer.py /path/to/your/book.pdf /path/to/your/definitions.txt
+python3 TextbookTermExplorer.py /path/to/your/book.pdf /docs/definitions.json
 ```
 
 The script will then ask you to enter a term. If the term exists in the definitions file, it will display the definition. If the term doesn't exist, it will search the PDF file for the context, generate a definition, and save it in the definitions file.

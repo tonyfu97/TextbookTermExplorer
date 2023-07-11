@@ -30,7 +30,7 @@
     <div id="definitions"></div>
 
     <script>
-        fetch('../results/definition.json')
+        fetch('./definition.json')
             .then(response => response.json())
             .then(data => {
                 let definitionsDiv = document.getElementById('definitions');
