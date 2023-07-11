@@ -52,7 +52,7 @@ def extract_contexts(book_text, term):
 def get_definition(term, context):
     response = openai.Completion.create(
         model="text-davinci-003",
-        prompt=f"The term '{term}' is used in the following context: '{context}'. Please provide a succinct definition. If the usage of the term in this context diverges from its conventional meaning, highlight the differences.\n\nDefinition:",
+        prompt=f"The term '{term}' is used in the following context: '{context}'. Please provide a succinct definition. If the usage of the term in this book diverges from its conventional meaning, highlight the differences.\n\nDefinition:",
         temperature=0.3,
         max_tokens=200
     )
@@ -70,15 +70,28 @@ def main(pdf_path, definitions_path):
             definitions = json.load(file)
 
     while True:
-        term = input("Please enter a term to define or 'q' to quit: ").strip()
+        term = input("Please enter a term to define, 'd term' to delete a term, or 'q' to quit: ").strip()
         if term.lower() in ['q', 'quit']:
             return
+
+        # Check if user wants to delete a term
+        if term.lower().startswith('d '):
+            term_to_delete = term[2:]
+            if term_to_delete in definitions:
+                del definitions[term_to_delete]
+                print(f"Deleted definition for '{term_to_delete}'.\n")
+                # Save definitions to file
+                with open(definitions_path, "w") as file:
+                    json.dump(definitions, file)
+            else:
+                print(f"No definition found for '{term_to_delete}'.\n")
+            continue
             
         # Check if term is in definitions file
         if term in definitions:
             print("Definition already exists in file:")
             print(definitions[term])
-            print("Overwrite? (y/n)")   
+            print("Do you want to overwrite the definition above with a new defintion? (y/n)")   
             if input().lower() != 'y':
                 continue
     

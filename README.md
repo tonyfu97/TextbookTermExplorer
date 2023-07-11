@@ -32,7 +32,7 @@ OPENAI_API_KEY=your-api-key
 python3 main.py /path/to/your/book.pdf /docs/definitions.json
 ```
 
-The script will then ask you to enter a term. If the term exists in the definitions file, it will display the definition. If the term doesn't exist, it will search the PDF file for the context, generate a definition, and save it in the definitions file.
+The script will then ask you to enter a term. If the term exists in the definitions file, it will display the definition. If the term doesn't exist, it will search the PDF file for the context, generate a definition, and save it in the definitions file. You can use `d [term]` to delete a term from the definition.
 
 You can terminate the script at any point by typing 'q', 'Q', 'quit', or 'Quit' when asked for a term.
 
